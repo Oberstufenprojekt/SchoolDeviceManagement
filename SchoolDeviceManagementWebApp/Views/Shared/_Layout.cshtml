@@ -14,48 +14,43 @@
         <div class="bg-light border-right" id="sidebar-wrapper">
             <div class="sidebar-heading">Device Management </div>
             <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Geräteübersicht</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Freie Geräte</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Vergebene Geräte</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Defekte Geräte</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Hilfe</a>
+                <a class="list-group-item list-group-item-action bg-light" asp-controller="Home" asp-action="Dashboard">Dashboard</a>
+                <a class="list-group-item list-group-item-action bg-light" asp-controller="Home" asp-action="DeviceOverview">Geräteübersicht</a>
+                <a class="list-group-item list-group-item-action bg-light" asp-controller="Home" asp-action="FreeDevices">Freie Geräte</a>
+                <a class="list-group-item list-group-item-action bg-light" asp-controller="Home" asp-action="AssignedDevices">Vergebene Geräte</a>
+                <a class="list-group-item list-group-item-action bg-light" asp-controller="Home" asp-action="FlawDevices">Defekte Geräte</a>
+                <partial name="_LoginPartial" />
             </div>
         </div>
         <!--Sidebar wrapper-->
-        <!--Page Content-->
+
+        <!-- Page Content -->
         <div id="page-content-wrapper">
-
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <button class="btn btn-primary" id="menu-toggle">-</button>
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="btn btn-primary" id="menu-toggle" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                    <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Login</a>
+                            <a class="list-group-item list-group-item-action bg-light" asp-controller="Home" asp-action="Help">?</a>
                         </li>
                     </ul>
                 </div>
             </nav>
-        </div>
-        <!--Page content wrapper-->
 
+            <div class="container-fluid">
+                <div class="container">
+                    <main role="main" class="pb-3">
+                        @RenderBody()
+                    </main>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
     </div>
     <!--wrapper-->
-
-
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
