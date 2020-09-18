@@ -23,7 +23,7 @@ namespace SchoolDeviceManagementWebApp.Controllers
             return View();
         }
 
-        public IActionResult Geräteübersicht()
+        public IActionResult Privacy()
         {
             return View();
         }
