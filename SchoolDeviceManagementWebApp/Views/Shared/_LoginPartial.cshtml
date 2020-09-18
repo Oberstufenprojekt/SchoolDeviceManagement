@@ -6,7 +6,7 @@
 {
 
     <a class="list-group-item list-group-item-action bg-light" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
-    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Dashboard", "Home", new { area = "" })">
+    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
         <button class="list-group-item list-group-item-action bg-light">Logout</button>
     </form>
 }
