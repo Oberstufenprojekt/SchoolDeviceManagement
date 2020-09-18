@@ -18,7 +18,7 @@ namespace SchoolDeviceManagementWebApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Dashboard()
+        public IActionResult Index()
         {
             return View();
         }
