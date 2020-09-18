@@ -18,12 +18,12 @@ namespace SchoolDeviceManagementWebApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Dashboard()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Geräteübersicht()
         {
             return View();
         }
