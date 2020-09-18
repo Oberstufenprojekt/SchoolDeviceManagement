@@ -18,4 +18,11 @@
     <Folder Include="Data\Migrations" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Home\Reservations.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

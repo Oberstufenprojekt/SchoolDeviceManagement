@@ -1,0 +1,76 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form>
+    <div class="text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="deviceType">Gerätetyp</label>
+                        <select class="form-control" id="deviceType">
+                            <!-- TODO: Add for loop for the device types -->
+                            <option>Notebook</option>
+                            <option>Tablet</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="from">Reservierung von</label>
+                        <!-- TODO: Change to datepicker -->
+                        <input class="form-control" type="text" id="from">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="amountOfDevices">Anzahl der Geräte</label>
+                        <input class="form-control" type="number" id="amountOfDevices">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="to">Reservierung bis</label>
+                        <input class="form-control" type="text" id="to">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="commentsTextAre">Kommentare</label>
+                        <textarea class="form-control" id="commentsTextAre" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="reserveratedFor">Reserviert für</label>
+                        <select class="form-control" id="deviceType">
+                            <!-- TODO: Add for loop for the teachers who are allowed to lend devices-->
+                            <option>Frau X</option>
+                            <option>Herr Y</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-6">
+                <a asp-controller="Home" asp-action="Index">
+                    <button type="button" class="btn btn-light" >Abbrechen</button>
+                </a>
+            </div>
+            <div class="col-6">
+                <div class="text-right">
+                    <button type="button" class="btn btn-danger mr-3">Löschen</button>
+                    <button type="button" class="btn btn-light">Speichern</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
