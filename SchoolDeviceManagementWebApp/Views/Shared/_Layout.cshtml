@@ -2,48 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SchoolDeviceManagementWebApp</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+
+    <!--custom styles for stylesheet-->
+    <link rel="stylesheet" href="~/css/simple-sidebar.css"/>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SchoolDeviceManagementWebApp</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+    <div class="d-flex" id="wrapper">
+        <!--Sidebar-->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">Device Management </div>
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action bg-light" asp-controller="Home" asp-action="Index">Dashboard</a>
+                <a class="list-group-item list-group-item-action bg-light" asp-controller="Home" asp-action="DeviceOverview">Geräteübersicht</a>
+                <a class="list-group-item list-group-item-action bg-light" asp-controller="Home" asp-action="FreeDevices">Freie Geräte</a>
+                <a class="list-group-item list-group-item-action bg-light" asp-controller="Home" asp-action="AssignedDevices">Vergebene Geräte</a>
+                <a class="list-group-item list-group-item-action bg-light" asp-controller="Home" asp-action="FlawDevices">Defekte Geräte</a>
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+        <!--Sidebar wrapper-->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <button class="btn btn-primary" id="menu-toggle" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
+
+                <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                    <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="list-group-item list-group-item-action bg-light" asp-controller="Home" asp-action="Help">?</a>
                         </li>
                     </ul>
                 </div>
+            </nav>
+
+            <div class="container-fluid">
+                <div class="container">
+                    <main role="main" class="pb-3">
+                        @RenderBody()
+                    </main>
+                </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </div>
+        <!-- /#page-content-wrapper -->
     </div>
+    <!--wrapper-->
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - SchoolDeviceManagementWebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020 - DeviceManagement - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
 </body>
 </html>

@@ -28,6 +28,31 @@ namespace SchoolDeviceManagementWebApp.Controllers
             return View();
         }
 
+        public IActionResult DeviceOverview()
+        {
+            return View();
+        }
+
+        public IActionResult FreeDevices()
+        {
+            return View();
+        }
+
+        public IActionResult AssignedDevices()
+        {
+            return View();
+        }
+
+        public IActionResult FlawDevices()
+        {
+            return View();
+        }
+
+        public IActionResult Help()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
