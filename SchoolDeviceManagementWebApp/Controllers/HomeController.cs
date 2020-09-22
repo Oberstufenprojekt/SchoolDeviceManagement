@@ -72,7 +72,12 @@ namespace SchoolDeviceManagementWebApp.Controllers
             QRCodeData _qrCodeData = _qrCode.CreateQrCode(txtQRCode, QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(_qrCodeData);
             Bitmap qrCodeImage = qrCode.GetGraphic(20);
-            return View(BitmapToBytesCode(qrCodeImage));
+            byte[] qrBytes = BitmapToBytesCode(qrCodeImage);
+            System.IO.Directory.CreateDirectory(@".\QRCodes");
+            System.IO.File.WriteAllBytes(@".\QRCodes\Index.png", qrBytes);
+
+            return View(qrBytes);
+
         }
         [NonAction]
         private static Byte[] BitmapToBytesCode(Bitmap image)
