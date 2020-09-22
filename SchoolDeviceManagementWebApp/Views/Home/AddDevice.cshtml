@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Genutzte Geräte";
+}
+
+    <div class="text-center">
+        <h1 class="display-4">Gerät hinzufügen</h1>
+        <form>
+            <div class="row">
+                <div class="col">
+                    <label>Seriennummer:</label>
+                    <input type="number" name="SerialNumber" class="form-control border border-primary" required d />
+                </div>
+                <div class="col">
+                    <label>Marke:</label>
+                    <input type="text" name="Brand" class="form-control border border-primary" required />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Modell:</label>
+                    <input type="text" name="Type" class="form-control border border-primary" required />
+                </div>
+                <div class="col">
+                    <label>Status:</label>
+                    <select class="form-control border border-primary">
+                        <option>Ausgeliehen</option>
+                        <option>Verfügbar</option>
+                        <option>In Reperatur</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <label>Vergeben von:</label>
+                            <input type="text" name="AssignedBy" class="form-control border border-primary" />
+                        </div>
+                        <div class="col">
+                            <label>Vergeben an:</label>
+                            <input type="text" name="AssignedTo" class="form-control border border-primary" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <label>Verliehen von:</label>
+                            <input type="datetime-local" name="LentFrom" class="form-control border border-primary" />
+                        </div>
+                        <div class="col">
+                            <label>Verliehen Bis:</label>
+                            <input type="datetime-local" name="LentUntill" class="form-control border border-primary" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Mängel:</label>
+                    <textarea class="form-control border border-primary"></textarea>
+                </div>
+                <div class="col">
+                    <label>Kommentar:</label>
+                    <textarea class="form-control border border-primary"></textarea>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px">
+                <div class="float-lg-right">
+                    <button class=" btn btn-success">Speichern</button>
+
+                    <button class="btn btn-danger">Löschen</button>
+
+                    <button class="btn btn-info">Abbrechen</button>
+
+                </div>
+            </div>
+        </form>
+    </div>

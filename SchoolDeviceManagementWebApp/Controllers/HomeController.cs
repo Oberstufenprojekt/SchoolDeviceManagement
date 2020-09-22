@@ -52,6 +52,10 @@ namespace SchoolDeviceManagementWebApp.Controllers
         {
             return View();
         }
+        public IActionResult AddDevice()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
