@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using QRCoder;
 using SchoolDeviceManagementWebApp.Models;
 
 namespace SchoolDeviceManagementWebApp.Controllers
@@ -55,6 +58,35 @@ namespace SchoolDeviceManagementWebApp.Controllers
         public IActionResult AddDevice()
         {
             return View();
+        }
+        public IActionResult GenerateQRCode()
+        {
+            return View();
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult GenerateQRCode(string txtQRCode)
+        {
+            QRCodeGenerator _qrCode = new QRCodeGenerator();
+            QRCodeData _qrCodeData = _qrCode.CreateQrCode(txtQRCode, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(_qrCodeData);
+            Bitmap qrCodeImage = qrCode.GetGraphic(20);
+            byte[] qrBytes = BitmapToBytesCode(qrCodeImage);
+            System.IO.Directory.CreateDirectory(@".\QRCodes");
+            System.IO.File.WriteAllBytes(@".\QRCodes\Index.png", qrBytes);
+
+            return View(qrBytes);
+
+        }
+        [NonAction]
+        private static Byte[] BitmapToBytesCode(Bitmap image)
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                image.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+                return stream.ToArray();
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
