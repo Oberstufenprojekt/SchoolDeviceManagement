@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col">
                     <label>Seriennummer:</label>
-                    <input type="number" name="SerialNumber" class="form-control border border-primary" required d />
+                    <input type="number" name="SerialNumber" class="form-control border border-primary" required/>
                 </div>
                 <div class="col">
                     <label>Marke:</label>
@@ -58,21 +58,24 @@
             <div class="row">
                 <div class="col">
                     <label>Mängel:</label>
-                    <textarea class="form-control border border-primary"></textarea>
+                    <textarea class="form-control border"></textarea>
                 </div>
                 <div class="col">
                     <label>Kommentar:</label>
-                    <textarea class="form-control border border-primary"></textarea>
+                    <textarea class="form-control border border-dark"></textarea>
                 </div>
             </div>
-            <div class="row" style="margin-top: 10px">
-                <div class="float-lg-right">
-                    <button class=" btn btn-success">Speichern</button>
-
-                    <button class="btn btn-danger">Löschen</button>
-
-                    <button class="btn btn-info">Abbrechen</button>
-
+            <div class="container" style="margin-top: 10px">
+                <div class="row justify-content-between">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-light">Abbrechen</button>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-right">
+                            <button type="button" class="btn btn-danger">Löschen</button>
+                            <button type="button" class="btn btn-success">Speichern</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>
