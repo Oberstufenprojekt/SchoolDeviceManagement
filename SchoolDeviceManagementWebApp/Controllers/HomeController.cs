@@ -4,7 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Logging;
+using SchoolDeviceManagementWebApp.Data;
 using SchoolDeviceManagementWebApp.Models;
 
 namespace SchoolDeviceManagementWebApp.Controllers
@@ -13,9 +16,12 @@ namespace SchoolDeviceManagementWebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private ApplicationDbContext _dbContext;
+
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext dbContext)
         {
             _logger = logger;
+            _dbContext = dbContext;
         }
 
         public IActionResult Index()
@@ -30,7 +36,7 @@ namespace SchoolDeviceManagementWebApp.Controllers
 
         public IActionResult DeviceOverview()
         {
-            return View();
+            return View(_dbContext.Devices.Include(d => d.Brand));
         }
 
         public IActionResult FreeDevices()
@@ -40,7 +46,9 @@ namespace SchoolDeviceManagementWebApp.Controllers
 
         public IActionResult AssignedDevices()
         {
-            return View();
+            return View(_dbContext.AssignedDevices
+                .Include(d => d.Device.Brand)
+                .Include(d => d.Assignee));
         }
 
         public IActionResult FlawDevices()
