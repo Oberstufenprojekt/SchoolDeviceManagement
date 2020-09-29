@@ -14,7 +14,6 @@ namespace SchoolDeviceManagementWebApp.Data
         public DbSet<Device> Devices { get; set; }
         public DbSet<DeviceWithFlaws> DevicesWithFlaws { get; set; }
         public DbSet<Flaw> Flaws { get; set; }
-        public DbSet<History> History { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
