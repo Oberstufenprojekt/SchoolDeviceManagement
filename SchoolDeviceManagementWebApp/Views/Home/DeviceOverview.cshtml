@@ -1,7 +1,11 @@
-﻿@{
+﻿@model IEnumerable<Device>
+
+@{
     ViewData["Title"] = "Geräteübersicht";
 }
 
 <div class="text-center">
     <h1>@ViewData["Title"]</h1>
+    
+    <partial name="SharedTables/_AllDevicesTable" />
 </div>
