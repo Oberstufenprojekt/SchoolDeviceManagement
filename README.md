@@ -1,5 +1,11 @@
 # SchoolDeviceManagement
+![.NET Core](https://github.com/Oberstufenprojekt/SchoolDeviceManagement/workflows/build/badge.svg?branch=master)
+![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/Oberstufenprojekt/SchoolDeviceManagement)
+![GitHub](https://img.shields.io/github/license/Oberstufenprojekt/SchoolDeviceManagement)
+![GitHub last commit](https://img.shields.io/github/last-commit/Oberstufenprojekt/SchoolDeviceManagement)
+
 A device managment software made for school.
 
-With the help of this software, students of our school should be able to borrow equipment (laptops, tablets, etc.).
-It should be possible to scan the devices with a barcode and identify them with this barcode. Furthermore, there should be a GUI where further inputs can be made and a view of the available devices should be possible. 
+With the help of this software, students of our school are able to borrow equipment (laptops, tablets, etc.).
+
+README is WIP!
