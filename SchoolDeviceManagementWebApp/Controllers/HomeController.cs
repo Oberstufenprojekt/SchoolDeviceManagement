@@ -4,8 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using SchoolDeviceManagementWebApp.Data;
 using SchoolDeviceManagementWebApp.Models;
+using SchoolDeviceManagementWebApp.ViewModels;
 
 namespace SchoolDeviceManagementWebApp.Controllers
 {
@@ -13,14 +16,20 @@ namespace SchoolDeviceManagementWebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private ApplicationDbContext _dbContext;
+     
+
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext dbContext)
         {
             _logger = logger;
+            _dbContext = dbContext;
         }
 
         public IActionResult Index()
         {
-            return View();
+
+            return View(new IndexTables(_dbContext)); 
+            //return View(_dbContext.Devices.Include(d => d.Brand));
         }
 
         public IActionResult Privacy()
