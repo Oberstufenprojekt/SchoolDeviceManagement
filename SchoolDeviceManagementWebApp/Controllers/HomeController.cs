@@ -16,7 +16,10 @@ namespace SchoolDeviceManagementWebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        private ApplicationDbContext _dbContext;
+        /// <summary>
+        /// The db context that is used to communicate with the database.
+        /// </summary>
+        private readonly ApplicationDbContext _dbContext;
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext dbContext)
         {
@@ -36,7 +39,10 @@ namespace SchoolDeviceManagementWebApp.Controllers
 
         public IActionResult DeviceOverview()
         {
-            return View(_dbContext.Devices.Include(d => d.Brand));
+            // A list with all devices in the database. No matter if they're in use, broken or available.
+            var allDevicesList = _dbContext.Devices.Include(d => d.Brand).ToList();
+            
+            return View(allDevicesList);
         }
 
         public IActionResult FreeDevices()
@@ -46,9 +52,13 @@ namespace SchoolDeviceManagementWebApp.Controllers
 
         public IActionResult AssignedDevices()
         {
-            return View(_dbContext.AssignedDevices
+            // A list with all assigned devices and their assignees.
+            var assignedDevicesList = _dbContext.AssignedDevices
+                .Include(d => d.Device)
                 .Include(d => d.Device.Brand)
-                .Include(d => d.Assignee));
+                .Include(d => d.Assignee).ToList();
+            
+            return View(assignedDevicesList);
         }
 
         public IActionResult FlawDevices()
@@ -67,20 +77,28 @@ namespace SchoolDeviceManagementWebApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        /// <summary>
+        /// This method is called when someone clicks on an edit button in a table. It gets the device by its serial
+        /// number out of the database and sends it to the AddDevice view where it can be edited. 
+        /// </summary>
+        /// <param name="id">The serial number of the device.</param>
+        /// <returns>The AddDevice View.</returns>
         public IActionResult Edit(string id)
         {
+            // Check if id is not null or empty.
             if (id == null || id.Equals(""))
             {
+                _logger.Log(LogLevel.Error, "No serial number was found.");
                 return NotFound();
             }
 
+            // TODO: What to do when the device can't be found?
             var deviceToEdit = _dbContext.Devices
                 .Include(d => d.Brand)
                 .First(d => d.SerialNumber.Equals(id));
 
-            _logger.Log(LogLevel.Debug, deviceToEdit.SerialNumber + deviceToEdit.Model);
-
-            return NotFound();
+            // TODO: Return the right view.
+            return NotFound(deviceToEdit);
         }
     }
 }
