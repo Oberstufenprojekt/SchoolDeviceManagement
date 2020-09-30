@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Serial number</th>
+        <th scope="col">Type</th>
+        <th scope="col">Brand</th>
+        <th scope="col">Model</th>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <th scope="col"></th>
+        }
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var device in Model)
+    {
+        <tr>
+            <td>@device.SerialNumber</td>
+            <td>@device.Type</td>
+            <td>@device.Brand.BrandName</td>
+            <td>@device.Model</td>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <td>
+                    <a asp-controller="Home" asp-action="Edit" asp-route-id="@device.SerialNumber">Edit</a>
+                </td>
+            }
+        </tr>
+    }
+    </tbody>
+</table>

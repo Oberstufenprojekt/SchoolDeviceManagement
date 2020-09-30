@@ -7,25 +7,5 @@
 <div class="text-center">
     <h1>@ViewData["Title"]</h1>
     
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Serial number</th>
-          <th scope="col">Type</th>
-          <th scope="col">Brand</th>
-          <th scope="col">Model</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach (var device in Model)
-        {
-          <tr>
-            <td>@device.SerialNumber</td>
-            <td>@device.Type</td>
-            <td>@device.Brand.BrandName</td>
-            <td>@device.Model</td>
-          </tr>
-        }
-      </tbody>
-    </table>
+    <partial name="SharedTables/_AllDevicesTable" />
 </div>

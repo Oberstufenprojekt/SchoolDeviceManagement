@@ -66,5 +66,21 @@ namespace SchoolDeviceManagementWebApp.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult Edit(string id)
+        {
+            if (id == null || id.Equals(""))
+            {
+                return NotFound();
+            }
+
+            var deviceToEdit = _dbContext.Devices
+                .Include(d => d.Brand)
+                .First(d => d.SerialNumber.Equals(id));
+
+            _logger.Log(LogLevel.Debug, deviceToEdit.SerialNumber + deviceToEdit.Model);
+
+            return NotFound();
+        }
     }
 }
