@@ -1,0 +1,38 @@
+﻿@model SchoolDeviceManagementWebApp.ViewModels.IndexTables
+@{ 
+    ViewData["Title"] = "Freie Geräte"; 
+}
+
+<div>
+    <h3>@ViewData["Title"]</h3>
+</div>
+
+<div class="container">
+    <div style="max-height:300px; overflow: auto">
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <td class="border border-light">Seriennummer</td>
+                    <td class="border border-light">Typ</td>
+                    <td class="border border-light">Marke</td>
+                    <td class="border border-light">Modell</td>
+                    <td class="border border-light">ausgeliehen von</td>
+                    <td class="border border-light">ausgeliehen bis</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var freeDevice in Model.FreeDevices)
+                {
+                <tr>
+                    <td>@freeDevice.SerialNumber</td>
+                    <td>@freeDevice.Type</td>
+                    <td>@freeDevice.Brand</td>
+                    <td>@freeDevice.Model</td>
+                    <td>@freeDevice.AssignedFrom</td>
+                    <td>@freeDevice.AssignedUntil</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
