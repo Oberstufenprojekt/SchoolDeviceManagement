@@ -16,7 +16,7 @@ namespace SchoolDeviceManagementWebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        private ApplicationDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
      
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext dbContext)
@@ -26,10 +26,8 @@ namespace SchoolDeviceManagementWebApp.Controllers
         }
 
         public IActionResult Index()
-        {
-
+        { 
             return View(new IndexTables(_dbContext)); 
-            //return View(_dbContext.Devices.Include(d => d.Brand));
         }
 
         public IActionResult Privacy()
