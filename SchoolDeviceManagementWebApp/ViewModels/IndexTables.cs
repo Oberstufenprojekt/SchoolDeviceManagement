@@ -76,9 +76,27 @@ namespace SchoolDeviceManagementWebApp.ViewModels
                     AssignedUntil= item.assignedUntil
 
                 }) ;
-
             }
-            
+        }
+
+        private void GetAssignedDevices()
+        {
+            var query = _dbContext.Devices.Join(
+                _dbContext.AssignedDevices,
+                device => device.SerialNumber,
+                assignedDevice => assignedDevice.Device.SerialNumber,
+                (device, assignedDevice) => new
+                {
+                    serialNumber = device.SerialNumber,
+                    type = device.Type,
+                    brand = device.Brand,
+                    model = device.Model,
+                    assignedFrom = assignedDevice.AssignedFrom,
+                    assignedUntil = assignedDevice.AssignedUntil
+                })
+                .Where(assignedDevice=>assignedDevice.assignedFrom <= System.DateTime.Now && assignedDevice.assignedFrom > System.DateTime.Now)
+                .ToList();
+            //TO LIST AND INTO A PROPERTIE !!!
         }
 
         #region Properties
