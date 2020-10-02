@@ -11,15 +11,6 @@ using SchoolDeviceManagementWebApp.Models;
 
 namespace SchoolDeviceManagementWebApp.ViewModels
 {
-    public struct StrFreeDevices
-    {
-        public string SerialNumber;
-        public string Type;
-        public Brand Brand;
-        public string Model;
-        public DateTime AssignedFrom;
-        public DateTime AssignedUntil;
-    }
     public class IndexTables
     {
         private List<string> _typeTables = new List<string>()
@@ -56,25 +47,22 @@ namespace SchoolDeviceManagementWebApp.ViewModels
                 {
                     serialNumber = device.SerialNumber,
                     type = device.Type,
-                    brand = device.Brand, 
+                    brand = device.Brand.BrandName, 
                     model = device.Model,
                     assignedFrom = assignedDevice.AssignedFrom,
                     assignedUntil = assignedDevice.AssignedUntil
                 })
                 .Where(assignedDevice => assignedDevice.assignedFrom > System.DateTime.Now || assignedDevice.assignedUntil < System.DateTime.Now)
                 .ToList();
-
+            FreeDevices = new List<FreeDevice>();
             foreach (var item in query)
             {
-                FreeDevices.Add(new StrFreeDevices()
+                FreeDevices.Add(new FreeDevice()
                 {
                     SerialNumber = item.serialNumber,
                     Type = item.type,
                     Brand = item.brand,
                     Model = item.model,
-                    AssignedFrom = item.assignedFrom,
-                    AssignedUntil= item.assignedUntil
-
                 }) ;
             }
         }
@@ -102,7 +90,7 @@ namespace SchoolDeviceManagementWebApp.ViewModels
         #region Properties
         public List<string> TypeTables { get => _typeTables; private set => _typeTables = value; }
         public List<Device> AllDevices { get; private set; }
-        public List<StrFreeDevices> FreeDevices { get; private set; }
+        public List<FreeDevice> FreeDevices { get; private set; }
         #endregion
     }
 }
