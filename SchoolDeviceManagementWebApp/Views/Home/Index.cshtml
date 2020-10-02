@@ -20,7 +20,7 @@
             @for (int i = 1; i < Model.TypeTables.Count()+1; i++)
             {
             <div class="modal-body mx-3">
-                <label for="sel1"id="@i">@i Tabelle</label>
+                <label for="sel1" id="@i">@i Tabelle</label>
                 <select class="form-control border border-dark" required>
                     @foreach (var item in Model.TypeTables)
                             {
@@ -46,5 +46,6 @@
 <!--Add a shared view-->
 <partial name="_AllDevicesTable"/>
 <partial name="_FreeDevicesTable"/>
+<partial name="_AssignedDevicesTable"/>
 
 

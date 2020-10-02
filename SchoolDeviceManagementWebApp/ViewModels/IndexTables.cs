@@ -27,6 +27,7 @@ namespace SchoolDeviceManagementWebApp.ViewModels
             _dbContext = dbContext;
             GetAllDevices();
             GetFreeDevices(); 
+            GetAssignedDevices();
         }
         private void GetAllDevices()
         {
@@ -54,7 +55,8 @@ namespace SchoolDeviceManagementWebApp.ViewModels
                 })
                 .Where(assignedDevice => assignedDevice.assignedFrom > System.DateTime.Now || assignedDevice.assignedUntil < System.DateTime.Now)
                 .ToList();
-            FreeDevices = new List<FreeDevice>();
+            
+            FreeDevices = new List<FreeDevice>(); //---> Creating a list to store the data request. 
             foreach (var item in query)
             {
                 FreeDevices.Add(new FreeDevice()
@@ -77,20 +79,34 @@ namespace SchoolDeviceManagementWebApp.ViewModels
                 {
                     serialNumber = device.SerialNumber,
                     type = device.Type,
-                    brand = device.Brand,
+                    brand = device.Brand.BrandName,
                     model = device.Model,
                     assignedFrom = assignedDevice.AssignedFrom,
                     assignedUntil = assignedDevice.AssignedUntil
                 })
-                .Where(assignedDevice=>assignedDevice.assignedFrom <= System.DateTime.Now && assignedDevice.assignedFrom > System.DateTime.Now)
+                .Where(assignedDevice=>assignedDevice.assignedFrom <= System.DateTime.Now && assignedDevice.assignedUntil > System.DateTime.Now)
                 .ToList();
-            //TO LIST AND INTO A PROPERTIE !!!
+            AssignedDevicesNow = new List<FreeDevice>();
+            foreach (var item in query)
+            {
+                AssignedDevicesNow.Add(new FreeDevice()
+                {
+                    SerialNumber = item.serialNumber,
+                    Brand = item.brand,
+                    Model = item.model,
+                    Type = item.type,
+                    AssignedFrom = item.assignedFrom,
+                    AssignedUntil = item.assignedFrom
+                });
+            }
+            
         }
 
         #region Properties
         public List<string> TypeTables { get => _typeTables; private set => _typeTables = value; }
         public List<Device> AllDevices { get; private set; }
         public List<FreeDevice> FreeDevices { get; private set; }
+        public List<FreeDevice> AssignedDevicesNow { get; private set; }
         #endregion
     }
 }
