@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Device
+
+@{
     ViewData["Title"] = "Genutzte Geräte";
 }
 
@@ -8,17 +10,17 @@
             <div class="row">
                 <div class="col">
                     <label>Seriennummer:</label>
-                    <input type="number" name="SerialNumber" class="form-control border border-primary" required/>
+                    <input type="text" name="SerialNumber" class="form-control border border-primary" asp-for="SerialNumber" required/>
                 </div>
                 <div class="col">
                     <label>Marke:</label>
-                    <input type="text" name="Brand" class="form-control border border-primary" required />
+                    <input type="text" name="Brand" class="form-control border border-primary" asp-for="Brand.BrandName" required />
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <label>Modell:</label>
-                    <input type="text" name="Type" class="form-control border border-primary" required />
+                    <input type="text" name="Type" class="form-control border border-primary" asp-for="Model" required />
                 </div>
                 <div class="col">
                     <label>Status:</label>

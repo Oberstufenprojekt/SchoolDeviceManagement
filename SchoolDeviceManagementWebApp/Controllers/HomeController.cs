@@ -73,10 +73,41 @@ namespace SchoolDeviceManagementWebApp.Controllers
         {
             return View();
         }
-        public IActionResult AddDevice()
+        
+        /// <summary>
+        /// This method is called when someone clicks on an edit button in a table. It gets the device by its serial
+        /// number out of the database and sends it to the AddDevice view where it can be edited. 
+        /// </summary>
+        /// <param name="id">The serial number of the device.</param>
+        /// <returns>The AddDevice View.</returns>
+        public IActionResult AddDevice(string id)
         {
-            return View();
+            // Check if id is not null or empty.
+            if (id == null || id.Equals(""))
+            {
+                _logger.LogDebug("No serial number given. Returning empty view.");
+                return View();
+            }
+            
+            try
+            {
+                var deviceToEdit = _dbContext.Devices
+                    .Include(d => d.Brand)
+                    .First(d => d.SerialNumber.Equals(id));
+                
+                _logger.LogInformation("Device with serial number {0} loaded from database", 
+                    deviceToEdit.SerialNumber);
+                
+                return View(deviceToEdit);
+            }
+            catch (InvalidOperationException)
+            {
+                _logger.LogError("No device with serial number: {0} found in database. Returning empty view", id);
+
+                return View();
+            }
         }
+        
         public IActionResult GenerateQRCode()
         {
             return View();
@@ -111,30 +142,6 @@ namespace SchoolDeviceManagementWebApp.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        /// <summary>
-        /// This method is called when someone clicks on an edit button in a table. It gets the device by its serial
-        /// number out of the database and sends it to the AddDevice view where it can be edited. 
-        /// </summary>
-        /// <param name="id">The serial number of the device.</param>
-        /// <returns>The AddDevice View.</returns>
-        public IActionResult Edit(string id)
-        {
-            // Check if id is not null or empty.
-            if (id == null || id.Equals(""))
-            {
-                _logger.Log(LogLevel.Error, "No serial number was found.");
-                return NotFound();
-            }
-
-            // TODO: What to do when the device can't be found?
-            var deviceToEdit = _dbContext.Devices
-                .Include(d => d.Brand)
-                .First(d => d.SerialNumber.Equals(id));
-
-            // TODO: Return the right view.
-            return NotFound(deviceToEdit);
         }
     }
 }
