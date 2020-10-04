@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Logging;
 using SchoolDeviceManagementWebApp.Data;
 using SchoolDeviceManagementWebApp.Models;
+using SchoolDeviceManagementWebApp.ViewModels;
 
 namespace SchoolDeviceManagementWebApp.Controllers
 {
@@ -28,8 +29,8 @@ namespace SchoolDeviceManagementWebApp.Controllers
         }
 
         public IActionResult Index()
-        {
-            return View();
+        { 
+            return View(new IndexTables(_dbContext)); 
         }
 
         public IActionResult Privacy()
@@ -75,30 +76,6 @@ namespace SchoolDeviceManagementWebApp.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        /// <summary>
-        /// This method is called when someone clicks on an edit button in a table. It gets the device by its serial
-        /// number out of the database and sends it to the AddDevice view where it can be edited. 
-        /// </summary>
-        /// <param name="id">The serial number of the device.</param>
-        /// <returns>The AddDevice View.</returns>
-        public IActionResult Edit(string id)
-        {
-            // Check if id is not null or empty.
-            if (id == null || id.Equals(""))
-            {
-                _logger.Log(LogLevel.Error, "No serial number was found.");
-                return NotFound();
-            }
-
-            // TODO: What to do when the device can't be found?
-            var deviceToEdit = _dbContext.Devices
-                .Include(d => d.Brand)
-                .First(d => d.SerialNumber.Equals(id));
-
-            // TODO: Return the right view.
-            return NotFound(deviceToEdit);
         }
     }
 }

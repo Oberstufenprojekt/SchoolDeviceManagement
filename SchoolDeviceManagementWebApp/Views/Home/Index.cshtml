@@ -1,7 +1,51 @@
-﻿@{
+﻿@model SchoolDeviceManagementWebApp.ViewModels.IndexTables
+
+@{
     ViewData["Title"] = "Dashboard";
 }
+
 
 <div class="text-center">
     <h1>@ViewData["Title"]</h1>
 </div>
+<div class="modal fade" id="modalSettingsForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4>Dashboard Settings</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @for (int i = 1; i < Model.TypeTables.Count()+1; i++)
+            {
+            <div class="modal-body mx-3">
+                <label for="sel1" id="@i">@i Tabelle</label>
+                <select class="form-control border border-dark" required>
+                    @foreach (var item in Model.TypeTables)
+                            {
+                    <option>@item</option>
+                }
+                </select>
+            </div>
+}
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-dark">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-12">
+    <div class="text-right">
+        <a href="" class="btn btn-dark mb-4 " data-toggle="modal" data-target="#modalSettingsForm">Launch Settings modal</a>
+    </div>
+</div>
+
+<!--Add a shared view-->
+<partial name="_AllDevicesTable"/>
+<partial name="_FreeDevicesTable"/>
+<partial name="_AssignedDevicesTable"/>
+
+
