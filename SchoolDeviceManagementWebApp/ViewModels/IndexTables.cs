@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using SchoolDeviceManagementWebApp.Data;
 using SchoolDeviceManagementWebApp.Models;
-
+//TODO: Kommentare 
 namespace SchoolDeviceManagementWebApp.ViewModels
 {
     public class IndexTables
@@ -55,6 +55,7 @@ namespace SchoolDeviceManagementWebApp.ViewModels
                 })
                 .Where(assignedDevice => assignedDevice.assignedFrom > System.DateTime.Now || assignedDevice.assignedUntil < System.DateTime.Now)
                 .ToList();
+            // TODO: Alle Geräte die nicht in AssignedDevice sind auch selektieren 
             
             FreeDevices = new List<FreeDevice>(); //---> Creating a list to store the data request. 
             foreach (var item in query)
