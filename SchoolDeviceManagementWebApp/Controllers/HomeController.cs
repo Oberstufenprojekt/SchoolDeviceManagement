@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
@@ -13,6 +14,7 @@ using SchoolDeviceManagementWebApp.ViewModels;
 
 namespace SchoolDeviceManagementWebApp.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -21,6 +23,7 @@ namespace SchoolDeviceManagementWebApp.Controllers
         /// The db context that is used to communicate with the database.
         /// </summary>
         private readonly ApplicationDbContext _dbContext;
+        
         
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext dbContext)
         {

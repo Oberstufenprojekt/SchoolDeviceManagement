@@ -16,6 +16,7 @@ namespace SchoolDeviceManagementWebApp.Areas.Identity
         {
             builder.ConfigureServices((context, services) => {
             });
+
         }
     }
 }
