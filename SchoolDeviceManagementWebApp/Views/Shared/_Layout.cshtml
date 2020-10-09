@@ -3,10 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
     <!--custom styles for stylesheet-->
-    <link rel="stylesheet" href="~/css/simple-sidebar.css"/>
+    <link rel="stylesheet" href="~/css/simple-sidebar.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <div class="d-flex" id="wrapper">
@@ -20,24 +21,16 @@
                 <a class="list-group-item list-group-item-action bg-light" asp-controller="Home" asp-action="AssignedDevices">Vergebene Geräte</a>
                 <a class="list-group-item list-group-item-action bg-light" asp-controller="Home" asp-action="FlawDevices">Defekte Geräte</a>
                 <partial name="_LoginPartial" />
+                <a class="list-group-item list-group-item-action bg-light" asp-controller="Home" asp-action="Help">Hilfe</a>
             </div>
         </div>
         <!--Sidebar wrapper-->
-
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                 <button class="btn btn-primary" id="menu-toggle" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
-                <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="list-group-item list-group-item-action bg-light" asp-controller="Home" asp-action="Help">?</a>
-                        </li>
-                    </ul>
-                </div>
             </nav>
 
             <div class="container-fluid">
@@ -60,14 +53,18 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+    @RenderSection("Scripts", required: false);
 
     <!-- Menu Toggle Script -->
-    <script>
-        $("#menu-toggle").click(function (e) {
+    <script>$("#menu-toggle").click(function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
-        });
-    </script>
+        });</script>
+
+    <!-- Menu Toggle on Load-->
+    <script>$(document).ready(function () {
+            $("#wrapper").toggleClass("toggled");
+        });</script>
+
 </body>
 </html>
